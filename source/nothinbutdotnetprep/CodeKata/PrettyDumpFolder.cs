@@ -8,8 +8,12 @@ namespace nothinbutdotnetprep.CodeKata
 {
     public class PrettyDumpFolder
     {
-
-        public static void TraverseTree(string root)
+        /// <summary>
+        /// Actually the same algorithm I used years ago on mainframe for IMS DB since
+        /// recursion in COBOL could blow up.
+        /// </summary>
+        /// <param name="root"></param>
+        public static void WalkDirectoryTree(string root)
         {
             if (!Directory.Exists(root))
             {
