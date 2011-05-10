@@ -1,0 +1,5 @@
+C:\NBDN\prep\bin\Debug\build.dll
+C:\NBDN\prep\bin\Debug\build.pdb
+C:\NBDN\prep\obj\Debug\ResolveAssemblyReference.cache
+C:\NBDN\prep\obj\Debug\build.dll
+C:\NBDN\prep\obj\Debug\build.pdb
