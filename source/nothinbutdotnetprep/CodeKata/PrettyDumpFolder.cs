@@ -6,13 +6,15 @@ using System.IO;
 
 namespace nothinbutdotnetprep.CodeKata
 {
+    /// <summary>
+    /// Actually the same algorithm I used years ago on mainframe for IMS DB since
+    /// recursion in COBOL could blow up.
+    /// </summary>
     public class PrettyDumpFolder
     {
-        /// <summary>
-        /// Actually the same algorithm I used years ago on mainframe for IMS DB since
-        /// recursion in COBOL could blow up.
-        /// </summary>
-        /// <param name="root"></param>
+        static int spacer;
+
+
         public static void WalkDirectoryTree(string root)
         {
             if (!Directory.Exists(root))
@@ -21,11 +23,13 @@ namespace nothinbutdotnetprep.CodeKata
             }
             var directories = new Stack<string>();
             directories.Push(root);
-            var depth = 0;
+            var depth = spacer;
+
             while (directories.Count > 0)
             {
-                depth+=2;
                 var currentDir = directories.Pop();
+                depth -= spacer;
+
                 Console.WriteLine(" ".PadLeft(depth) + currentDir);
                 var subDirs = Directory.GetDirectories(currentDir);
                 string[] files = files = Directory.GetFiles(currentDir);
@@ -36,7 +40,10 @@ namespace nothinbutdotnetprep.CodeKata
                 }
 
                 foreach (var str in subDirs)
+                {
                     directories.Push(str);
+                }
+                depth += spacer;
             }
         }
 
