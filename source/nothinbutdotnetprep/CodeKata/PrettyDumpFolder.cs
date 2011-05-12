@@ -12,10 +12,10 @@ namespace nothinbutdotnetprep.CodeKata
     /// </summary>
     public class PrettyDumpFolder
     {
-        static int spacer;
+        static int spaces;
 
 
-        public static void WalkDirectoryTree(string root)
+        public int WalkDirectoryTree(string root, int spaces = 2)
         {
             if (!Directory.Exists(root))
             {
@@ -23,12 +23,13 @@ namespace nothinbutdotnetprep.CodeKata
             }
             var directories = new Stack<string>();
             directories.Push(root);
-            var depth = spacer;
+            int count=0;
 
             while (directories.Count > 0)
             {
                 var currentDir = directories.Pop();
-                depth -= spacer;
+                int depth = currentDir.Split('\\').Count() * spaces;
+                count++;
 
                 Console.WriteLine(" ".PadLeft(depth) + currentDir);
                 var subDirs = Directory.GetDirectories(currentDir);
@@ -36,15 +37,17 @@ namespace nothinbutdotnetprep.CodeKata
 
                 foreach (var file in files)
                 {
-                     Console.WriteLine(" ".PadLeft(depth) + file);
+                     Console.WriteLine(" ".PadLeft(depth + spaces) + Path.GetFileName(file));
                 }
 
                 foreach (var str in subDirs)
                 {
                     directories.Push(str);
                 }
-                depth += spacer;
+
             }
+
+            return count;
         }
 
 
